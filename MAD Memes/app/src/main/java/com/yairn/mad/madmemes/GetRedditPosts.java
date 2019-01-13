@@ -17,10 +17,15 @@ import java.util.ArrayList;
 
 public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>> {
 
+    private static final String reddit_url = "https://www.reddit.com/r/memes/.json";
+
     private GetRedditPostsCallback callback;
 
-    public GetRedditPosts(GetRedditPostsCallback callback){
+    private String afterPostRef = "";
+
+    public GetRedditPosts(GetRedditPostsCallback callback, String afterPostRef){
         this.callback = callback;
+        this.afterPostRef = afterPostRef;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
         StringBuffer sb = new StringBuffer();
 
         try {
-            URL url = new URL("https://www.reddit.com/r/memes/.json");
+            URL url = new URL(reddit_url + afterPostRef);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -53,8 +58,11 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
             JSONObject jsonObjectPost, jsonObjectPostData;
             JSONArray jsonArrayImages;
             JSONObject jsonObjectImageSource;
-            String postAuthor, postTitle, postURL = null;
+            String postAuthor, postTitle, postURL = null, lastPostRef = null;
             int postScore;
+
+            lastPostRef = jsonObjectData.getString("after");
+
 
             // "author", "score", "title", "preview->images[0]->source->url, + width, + height"
 
@@ -76,17 +84,11 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
 
                     postURL = postURL.replace("amp;", "");
 
-                    System.out.print("HEREHEREHEREHEREHEREHEREHEREHERE");
                 }
 
-                System.out.print("NONONONONONONONONONONONONO");
-
-
-                posts.add(new RedditPost(postAuthor, postTitle, postScore, postURL));
+                posts.add(new RedditPost(postAuthor, postTitle, postScore, postURL, lastPostRef));
 
             }
-
-
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

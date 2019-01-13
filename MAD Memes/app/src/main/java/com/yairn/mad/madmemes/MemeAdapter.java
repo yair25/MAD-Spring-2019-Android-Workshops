@@ -8,9 +8,14 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class MemeAdapter extends RecyclerView.Adapter<RedditPostViewHolder> {
+public class MemeAdapter extends RecyclerView.Adapter<RedditPostViewHolder> implements GetRedditPosts.GetRedditPostsCallback {
 
     private ArrayList<RedditPost> mPosts = null;
+
+    @Override
+    public void onBackgroundCallComplete(ArrayList<RedditPost> posts) {
+        addPosts(posts);
+    }
 
     public MemeAdapter() {
         mPosts = new ArrayList<>();
@@ -34,6 +39,11 @@ public class MemeAdapter extends RecyclerView.Adapter<RedditPostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RedditPostViewHolder holder, int position) {
         holder.setPost(mPosts.get(position));
+
+        if(position + 2 > mPosts.size()) {
+            new GetRedditPosts(this, "?after=" + mPosts.get(position).lastPostRef).execute();
+
+        }
     }
 
     @Override

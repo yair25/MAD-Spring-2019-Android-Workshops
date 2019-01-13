@@ -4,22 +4,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GetRedditPosts.GetRedditPostsCallback {
 
+    private ProgressBar loadingProgressBar;
     private MemeAdapter mAdapter;
 
     @Override
     public void onBackgroundCallComplete(ArrayList<RedditPost> posts) {
         mAdapter.addPosts(posts);
+        loadingProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadingProgressBar = findViewById(R.id.memeProgressBar);
+        loadingProgressBar.setVisibility(View.VISIBLE);
         setupRecyclerView();
     }
 
@@ -35,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements GetRedditPosts.Ge
         mAdapter = new MemeAdapter();
         recyclerView.setAdapter(mAdapter);
 
-        new GetRedditPosts(this).execute();
+        new GetRedditPosts(this, "").execute();
 
     }
+
 }

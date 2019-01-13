@@ -3,6 +3,7 @@ package com.yairn.mad.madmemes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -13,6 +14,7 @@ public class RedditPostViewHolder extends RecyclerView.ViewHolder {
     private TextView scoreTextView;
     private TextView titleTextView;
     private ImageView memeImageView;
+    private ProgressBar memeImageProgressBar;
 
     public RedditPostViewHolder(View itemView) {
         super(itemView);
@@ -21,6 +23,8 @@ public class RedditPostViewHolder extends RecyclerView.ViewHolder {
         scoreTextView = itemView.findViewById(R.id.reddit_post_score);
         titleTextView = itemView.findViewById(R.id.reddit_post_title);
         memeImageView = itemView.findViewById(R.id.reddit_post_image);
+        memeImageProgressBar = itemView.findViewById(R.id.reddit_post_image_progress_bar);
+        memeImageProgressBar.setVisibility(View.VISIBLE);
     }
 
     public void setPost(RedditPost post) {
@@ -29,6 +33,8 @@ public class RedditPostViewHolder extends RecyclerView.ViewHolder {
         titleTextView.setText(post.title);
         if(post.image_url != null) {
             Picasso.get().load(post.image_url).fit().into(memeImageView);
+            memeImageProgressBar.setVisibility(View.INVISIBLE);
+
         }
     }
 
