@@ -13,7 +13,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -48,10 +50,19 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         genderSpinner = findViewById(R.id.genderSpinner);
 
+        genderSpinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(v);
+                return false;
+            }
+        });
+
         addPhotoButton.setBackgroundResource(R.drawable.ic_add_photo);
     }
 
     public void onClickPic(View view) {
+        checkPermissions();
         dispatchTakePictureIntent();
     }
 
@@ -124,14 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-//    private void galleryAddPic() {
-//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//        File f = new File(currentPhotoPath);
-//        Uri contentUri = Uri.fromFile(f);
-//        mediaScanIntent.setData(contentUri);
-//        this.sendBroadcast(mediaScanIntent);
-//    }
-
     private void setPic() {
         // Get the dimensions of the View
         int targetW = addPhotoButton.getWidth();
@@ -154,6 +157,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         bitmapPicture = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
         addPhotoButton.setImageBitmap(bitmapPicture);
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    private void checkPermissions() {
+        String[] permissions = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+        for(String permission: permissions) {
+            if(checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{permission}, ALL_PERM_GRANTED);
+            }
+        }
+
     }
 
 

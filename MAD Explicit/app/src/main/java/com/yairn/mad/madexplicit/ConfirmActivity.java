@@ -27,7 +27,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
         nameTextView.setText("Name: " + extras.getString("Name"));
         emailTextView.setText("Email: " + extras.getString("Email"));
-        genderTextView.setText("Gender" + extras.getString("Gender"));
+        genderTextView.setText("Gender: " + extras.getString("Gender"));
         setPic(extras.getString("PicturePath"));
     }
 
