@@ -13,15 +13,16 @@ Steps:
 
 9. Next go to app > res > layout > activity_register.xml
 10. With ConstraintLayout, add the views
-10. Add appropriate strings to app > res > values > strings.xml
-12. Add folder (xml) and file (file_paths.xml) to app > res
-13. Include provider to application in app > manifests > AndroidManifest.xml
-14. Next go to app > java > com.________ > RegisterActivity
-15. Code and link to UI
+11. Add ic_ drawable
+12. Add appropriate strings to app > res > values > strings.xml
+13. Add folder (xml) and file (file_paths.xml) to app > res
+14. Include provider to application in app > manifests > AndroidManifest.xml
+15. Next go to app > java > com.________ > RegisterActivity
+16. Code and link to UI
 
-16. Next go to app > res > layout > activity_confirm.xml
-17. With ConstraintLayout, add the views
-18. Add appropriate strings to app > res > values > strings.xml
-19. Next go to app > java > com.________ > ConfirmActivity
-20. Code and link to UI
+17. Next go to app > res > layout > activity_confirm.xml
+18. With ConstraintLayout, add the views
+19. Add appropriate strings to app > res > values > strings.xml
+20. Next go to app > java > com.________ > ConfirmActivity
+21. Code and link to UI
 
