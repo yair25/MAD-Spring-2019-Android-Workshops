@@ -1,5 +1,8 @@
 package com.yairn.mad.madmemes;
 
+/*
+ * Class that is used to store the information of a reddit post
+ */
 public class RedditPost {
 
     String author;
