@@ -27,10 +27,17 @@ public class KittenItemHolder extends RecyclerView.ViewHolder {
         kittenItemBrowserImageButton = itemView.findViewById(R.id.kittenItemBrowserImageButton);
     }
 
+    /*
+     * The setKittenImageView method, uses the Picasso API load the image onto the kittenImageView.
+     */
     public void setKittenImageView(final String url) {
         Picasso.get().load(url).fit().into(kittenImageView);
     }
 
+    /*
+     * The setKittenImageViewTap method, sets the onClick listener of the kittenImageView.
+     * If the kittenImageView is clicked, then the KittenImageActivity will start.
+     */
     public void setKittenImageViewTap(final String url) {
 
         kittenImageView.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +51,11 @@ public class KittenItemHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    /*
+     * The setKittenFavoriteButton method, sets the onClick listener of the kittenItemFavoriteImageButton.
+     * If isFavorite is true, then the ic_action_star_full is placed on the kittenItemFavoriteImageButton,
+     * else the ic_action_star_empty is placed on the kittenItemFavoriteImageButton.
+     */
     public void setKittenFavoriteButton() {
 
         kittenItemFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +72,11 @@ public class KittenItemHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    /*
+     * The setKittenBrowserButton method, sets the onClick listener of the kittenItemBrowserImageButton.
+     * If the kittenItemBrowserImageButton is clicked, then the browser app will be opened to the URL
+     * of the image.
+     */
     public void setKittenBrowserButton(final String url) {
 
         kittenItemBrowserImageButton.setOnClickListener(new View.OnClickListener() {
