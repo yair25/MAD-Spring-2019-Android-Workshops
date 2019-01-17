@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">MAD Explicit</string>
 
+    <string name="email_hint_text">Email</string>
+    <string name="password_hint_text">Password</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+
+    <string name="full_name_hint_text">Full Name</string>
+    <string name="email_signup_text">Sign Up for Email?</string>
+
+    <string name="next_text">Next</string>
+    <string name="confirm_text">Confirm</string>
+
+    <string name="name_placeholder">Name: </string>
+    <string name="email_placeholder">Email: </string>
+    <string name="gender_placeholder">Gender: </string>
+
     <string-array name="gender">
         <item>Gender</item>
         <item>Male</item>
