@@ -16,6 +16,9 @@ public class RedditPostViewHolder extends RecyclerView.ViewHolder {
     private ImageView memeImageView;
     private ProgressBar memeImageProgressBar;
 
+    /*
+     * Constructor that binds the UI to the code, and shows Progress bar
+     */
     public RedditPostViewHolder(View itemView) {
         super(itemView);
 
@@ -27,6 +30,9 @@ public class RedditPostViewHolder extends RecyclerView.ViewHolder {
         memeImageProgressBar.setVisibility(View.VISIBLE);
     }
 
+    /*
+     * The setPost method, add a post's data to the View Holder so the data can be displayed
+     */
     public void setPost(RedditPost post) {
         authorTextView.setText(post.author);
         scoreTextView.setText("" + post.score);

@@ -19,10 +19,14 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
 
     private static final String reddit_url = "https://www.reddit.com/r/memes/.json";
 
+    // Callback
     private GetRedditPostsCallback callback;
 
     private String afterPostRef = "";
 
+    /*
+     * The constructor that stores the callback and string reference of the last post
+     */
     public GetRedditPosts(GetRedditPostsCallback callback, String afterPostRef){
         this.callback = callback;
         this.afterPostRef = afterPostRef;
@@ -33,6 +37,9 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
         super.onPreExecute();
     }
 
+    /*
+     * A thread that gets the reddit posts JSON, parses it, and puts the posts into a container
+     */
     @Override
     protected ArrayList<RedditPost> doInBackground(Void... arg0) {
 
@@ -101,6 +108,10 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
         return posts;
     }
 
+    /*
+     * Once the Thread is done, this method is called, and the container with the posts is sent
+     * to the call back.
+     */
     @Override
     protected void onPostExecute(ArrayList<RedditPost> posts) {
         super.onPostExecute(posts);
@@ -109,6 +120,9 @@ public class GetRedditPosts extends AsyncTask<Void, Void, ArrayList<RedditPost>>
     }
 
 
+    /*
+     * Callback
+     */
     public interface GetRedditPostsCallback {
         public void onBackgroundCallComplete(ArrayList<RedditPost> posts);
     }
